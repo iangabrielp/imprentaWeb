@@ -1,19 +1,25 @@
 <section class="about-section" id="nosotros" *ngIf="!loading && about.enabled !== false">
   <div class="container">
+    <div class="section-header" data-reveal>
+      <span class="section-badge">Sobre Nosotros</span>
+      <h2>{{ about.title }}</h2>
+      <p>{{ about.subtitle }}</p>
+    </div>
+
     <div class="about-grid">
-      <!-- Imagen -->
-      <div class="about-image">
-        <img [src]="about.image" [alt]="about.title" loading="lazy">
+      <div class="about-image-wrapper" data-reveal="left">
+        <div class="about-image">
+          <img [src]="about.image" [alt]="about.title" loading="lazy">
+          <div class="image-accent"></div>
+        </div>
+        <div class="image-decoration"></div>
       </div>
 
-      <!-- Contenido -->
-      <div class="about-content">
-        <h2>{{ about.title }}</h2>
-        <p class="subtitle">{{ about.subtitle }}</p>
+      <div class="about-content" data-reveal="right">
         <p class="description">{{ about.description }}</p>
 
         <div class="about-values">
-          <div *ngFor="let value of about.values" class="value-item">
+          <div *ngFor="let value of about.values; let i = index" class="value-item stagger-item" [style.--stagger-index]="i">
             <mat-icon>check_circle</mat-icon>
             <span>{{ value }}</span>
           </div>
@@ -21,10 +27,16 @@
 
         <div class="about-mission-vision">
           <div class="mv-item">
+            <div class="mv-icon">
+              <mat-icon>flag</mat-icon>
+            </div>
             <h4>Misión</h4>
             <p>{{ about.mission }}</p>
           </div>
           <div class="mv-item">
+            <div class="mv-icon">
+              <mat-icon>visibility</mat-icon>
+            </div>
             <h4>Visión</h4>
             <p>{{ about.vision }}</p>
           </div>

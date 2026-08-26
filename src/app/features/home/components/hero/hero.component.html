@@ -1,8 +1,26 @@
 <section class="hero" *ngIf="heroData && heroData.enabled" [style.background-image]="'url(' + heroData.backgroundImage + ')'">
+  <div class="hero-gradient"></div>
   <div class="hero-overlay"></div>
+  <div class="hero-particles">
+    <div class="particle" *ngFor="let i of [1,2,3,4,5,6,7,8]"></div>
+  </div>
   <div class="hero-content container">
-    <h1 class="hero-title">{{ heroData.title }}</h1>
-    <p class="hero-subtitle">{{ heroData.subtitle }}</p>
-    <a [routerLink]="heroData.ctaLink" class="hero-cta btn-primary">{{ heroData.ctaText }}</a>
+    <div class="hero-badge" data-reveal="scale">
+      <span class="badge-dot"></span>
+      Impresión Profesional
+    </div>
+    <h1 class="hero-title">
+      <span *ngFor="let letter of titleLetters; let i = index" class="hero-letter" [style.animation-delay]="(i * 0.05) + 's'">{{ letter === ' ' ? '\u00A0' : letter }}</span>
+    </h1>
+    <p class="hero-subtitle" data-reveal>{{ heroData.subtitle }}</p>
+    <div class="hero-actions" data-reveal>
+      <a [routerLink]="heroData.ctaLink" class="hero-cta">
+        <span>{{ heroData.ctaText }}</span>
+        <mat-icon>arrow_forward</mat-icon>
+      </a>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-line"></div>
+    </div>
   </div>
 </section>

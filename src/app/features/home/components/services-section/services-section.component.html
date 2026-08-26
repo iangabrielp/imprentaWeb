@@ -1,20 +1,20 @@
 <section class="services-section" id="servicios">
   <div class="container">
-    <!-- Título de la sección -->
-    <div class="section-header">
+    <div class="section-header" data-reveal>
+      <span class="section-badge">Servicios</span>
       <h2>Nuestros Servicios</h2>
       <p>Soluciones gráficas adaptadas a tus necesidades. Calidad y profesionalismo en cada proyecto.</p>
     </div>
 
-    <!-- Grid de servicios -->
     <div class="services-grid" *ngIf="!loading; else loadingTemplate">
       <app-service-card
-        *ngFor="let service of services"
+        *ngFor="let service of services; let i = index"
         [service]="service"
+        class="stagger-item"
+        [style.--stagger-index]="i"
       ></app-service-card>
     </div>
 
-    <!-- Template de carga -->
     <ng-template #loadingTemplate>
       <div class="loading-spinner">
         <mat-spinner diameter="50"></mat-spinner>
@@ -22,7 +22,6 @@
       </div>
     </ng-template>
 
-    <!-- Mensaje si no hay servicios -->
     <div *ngIf="!loading && services.length === 0" class="no-services">
       <p>No hay servicios disponibles en este momento.</p>
     </div>

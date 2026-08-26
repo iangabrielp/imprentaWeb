@@ -1,17 +1,24 @@
 <section class="web-dev-section" id="desarrollo-web" *ngIf="!loading && webDevData?.enabled !== false">
+  <div class="web-dev-bg">
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+  </div>
   <div class="container">
-    <div class="section-header">
+    <div class="section-header" data-reveal>
+      <span class="section-badge">Desarrollo Web</span>
       <h2>{{ webDevData?.title || 'Desarrollo Web' }}</h2>
       <p>{{ webDevData?.subtitle || 'Soluciones digitales para tu negocio' }}</p>
     </div>
 
     <div class="web-dev-grid" *ngIf="services.length > 0; else noServices">
-      <div class="web-dev-card" *ngFor="let service of services">
+      <div class="web-dev-card" *ngFor="let service of services; let i = index" class="stagger-item" [style.--stagger-index]="i">
         <div class="card-image">
           <img [src]="service.image" [alt]="service.name" loading="lazy">
+          <div class="card-icon">
+            <mat-icon>{{ service.icon }}</mat-icon>
+          </div>
         </div>
         <div class="card-content">
-          <mat-icon>{{ service.icon }}</mat-icon>
           <h3>{{ service.name }}</h3>
           <p>{{ service.description }}</p>
           <ul class="features">
@@ -21,15 +28,16 @@
           </ul>
           <div class="card-footer">
             <span class="price" *ngIf="service.priceFrom">Desde ${{ service.priceFrom }}</span>
-            <button mat-raised-button color="primary">Ver más</button>
+            <button class="card-btn" (click)="$event.stopPropagation()">Ver más</button>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="cta-container" *ngIf="webDevData?.ctaText">
-      <a [routerLink]="webDevData?.ctaLink || '/desarrollo-web'" mat-raised-button color="accent">
-        {{ webDevData?.ctaText }}
+    <div class="cta-container" *ngIf="webDevData?.ctaText" data-reveal>
+      <a [routerLink]="webDevData?.ctaLink || '/desarrollo-web'" class="cta-button">
+        <span>{{ webDevData?.ctaText }}</span>
+        <mat-icon>arrow_forward</mat-icon>
       </a>
     </div>
   </div>

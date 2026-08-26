@@ -1,33 +1,38 @@
 <section class="clients-section" id="clientes" *ngIf="!loading && clients.length > 0">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header" data-reveal>
+      <span class="section-badge">Clientes</span>
       <h2>Empresas que confían en nosotros</h2>
       <p>Algunas de las marcas que han elegido nuestra calidad y servicio.</p>
     </div>
 
-    <div class="carousel-container">
-      <button class="carousel-btn prev" (click)="prev()" aria-label="Anterior">
-        <mat-icon>chevron_left</mat-icon>
-      </button>
+    <div class="carousel-wrapper" data-reveal>
+      <div class="carousel-container">
+        <button class="carousel-btn prev" (click)="prev()" aria-label="Anterior">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
 
-      <div class="carousel-track">
-        <div *ngFor="let client of visibleClients" class="client-item">
-          <img [src]="client.logo" [alt]="client.name" loading="lazy">
-          <p>{{ client.name }}</p>
+        <div class="carousel-track">
+          <div *ngFor="let client of visibleClients" class="client-item">
+            <div class="client-logo-wrapper">
+              <img [src]="client.logo" [alt]="client.name" loading="lazy">
+            </div>
+            <p>{{ client.name }}</p>
+          </div>
         </div>
+
+        <button class="carousel-btn next" (click)="next()" aria-label="Siguiente">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
       </div>
 
-      <button class="carousel-btn next" (click)="next()" aria-label="Siguiente">
-        <mat-icon>chevron_right</mat-icon>
-      </button>
-    </div>
-
-    <div class="carousel-dots">
-      <span *ngFor="let dot of clients" 
-            class="dot" 
-            [class.active]="dot === clients[currentIndex]"
-            (click)="currentIndex = clients.indexOf(dot)">
-      </span>
+      <div class="carousel-dots">
+        <span *ngFor="let dot of clients"
+              class="dot"
+              [class.active]="dot === clients[currentIndex]"
+              (click)="currentIndex = clients.indexOf(dot)">
+        </span>
+      </div>
     </div>
   </div>
 </section>

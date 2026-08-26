@@ -1,14 +1,15 @@
 <section class="faq-section" id="faq">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header" data-reveal>
+      <span class="section-badge">FAQ</span>
       <h2>Preguntas frecuentes</h2>
       <p>Resolvemos las dudas más comunes sobre nuestros servicios y productos.</p>
     </div>
 
     <div *ngIf="!loading; else loadingTemplate">
-      <div *ngIf="faqs.length > 0; else noFaqs">
+      <div *ngIf="faqs.length > 0; else noFaqs" class="faq-wrapper" data-reveal>
         <mat-accordion>
-          <mat-expansion-panel *ngFor="let faq of faqs" [expanded]="faq === faqs[0]">
+          <mat-expansion-panel *ngFor="let faq of faqs; let i = index" [expanded]="faq === faqs[0]" class="faq-panel stagger-item" [style.--stagger-index]="i">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon>help_outline</mat-icon>

@@ -1,26 +1,26 @@
-<mat-card class="service-card" (click)="openServiceDetail()">
-  <!-- Imagen del servicio -->
+<div class="service-card" (click)="openServiceDetail()">
   <div class="service-image">
     <img [src]="service.image" [alt]="service.name" loading="lazy">
+    <div class="service-image-overlay"></div>
     <div class="service-badge" *ngIf="service.priceFrom">
       Desde ${{ service.priceFrom }}
     </div>
   </div>
 
-  <!-- Contenido -->
-  <mat-card-content>
+  <div class="service-content">
     <h3>{{ service.name }}</h3>
-    <p>{{ service.description | slice:0:100 }}{{ service.description.length > 100 ? '...' : '' }}</p>
+    <p>{{ service.description | slice:0:120 }}{{ service.description.length > 120 ? '...' : '' }}</p>
     <div class="service-features" *ngIf="service.features && service.features.length > 0">
       <span *ngFor="let feature of service.features.slice(0, 3)" class="feature-tag">
         <mat-icon>check_circle</mat-icon> {{ feature }}
       </span>
     </div>
-  </mat-card-content>
+  </div>
 
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="$event.stopPropagation(); openServiceDetail()">
-      Ver detalles <mat-icon>arrow_forward</mat-icon>
+  <div class="service-action">
+    <button class="service-btn" (click)="$event.stopPropagation(); openServiceDetail()">
+      <span>Ver detalles</span>
+      <mat-icon>arrow_forward</mat-icon>
     </button>
-  </mat-card-actions>
-</mat-card>
+  </div>
+</div>

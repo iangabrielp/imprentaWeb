@@ -1,37 +1,37 @@
-<!-- Barra de navegación principal -->
-<mat-toolbar color="primary" class="header-toolbar">
+<header class="header" [class.scrolled]="isScrolled">
   <div class="header-container">
-    <!-- Logo -->
     <a routerLink="/" class="logo">
       <img src="assets/images/services/logo1.jpg" alt="Imprenta Web" class="logo-img">
       <span class="logo-text">Estudio<span class="highlight">Creativo</span></span>
     </a>
 
-    <!-- Navegación para escritorio -->
     <nav class="desktop-nav">
       <a *ngFor="let item of navItems" [routerLink]="item.link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         {{ item.label }}
       </a>
     </nav>
 
-    <!-- Botones de acción (Login + menú móvil) -->
     <div class="actions">
-      <button mat-raised-button color="accent" routerLink="/login" class="login-btn">
-        <mat-icon>login</mat-icon> Login
-      </button>
-      <button mat-icon-button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
-        <mat-icon>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
+      <a routerLink="/login" class="login-btn">
+        <mat-icon>login</mat-icon>
+        <span class="login-text">Login</span>
+      </a>
+      <button class="menu-toggle" (click)="toggleMenu()" [class.open]="isMenuOpen" aria-label="Toggle menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
       </button>
     </div>
   </div>
-</mat-toolbar>
+</header>
 
-<!-- Menú móvil (desplegable) -->
 <div class="mobile-menu" [class.open]="isMenuOpen">
   <a *ngFor="let item of navItems" [routerLink]="item.link" (click)="toggleMenu()" routerLinkActive="active">
     {{ item.label }}
   </a>
-  <button mat-raised-button color="accent" routerLink="/login" (click)="toggleMenu()" class="mobile-login-btn">
+  <a routerLink="/login" (click)="toggleMenu()" class="mobile-login-btn">
     <mat-icon>login</mat-icon> Login
-  </button>
+  </a>
 </div>
+
+<div class="mobile-overlay" [class.visible]="isMenuOpen" (click)="toggleMenu()"></div>

@@ -1,27 +1,28 @@
 <footer class="footer">
+  <div class="footer-glow"></div>
   <div class="footer-container">
-    <!-- Columna 1: Información de la empresa -->
-    <div class="footer-column">
-      <h3>Estudio<span class="highlight">Creativo</span></h3>
-      <p>Soluciones gráficas profesionales para tu negocio. Calidad y compromiso en cada impresión.</p>
+    <div class="footer-column brand-column">
+      <h3 class="brand-name">Estudio<span class="highlight">Creativo</span></h3>
+      <p class="brand-description">Soluciones gráficas profesionales para tu negocio. Calidad y compromiso en cada impresión.</p>
       <div class="social-icons">
-        <a *ngFor="let social of socialLinks" [href]="social.url" target="_blank" rel="noopener noreferrer" aria-label="{{ social.name }}">
+        <a *ngFor="let social of socialLinks" [href]="social.url" target="_blank" rel="noopener noreferrer" [attr.aria-label]="social.name" class="social-link">
           <mat-icon>{{ social.icon }}</mat-icon>
         </a>
       </div>
     </div>
 
-    <!-- Columna 2: Enlaces rápidos -->
     <div class="footer-column">
       <h4>Enlaces rápidos</h4>
-      <ul>
+      <ul class="footer-links">
         <li *ngFor="let link of quickLinks">
-          <a [routerLink]="link.link">{{ link.label }}</a>
+          <a [routerLink]="link.link">
+            <span class="link-arrow">→</span>
+            {{ link.label }}
+          </a>
         </li>
       </ul>
     </div>
 
-    <!-- Columna 3: Contacto -->
     <div class="footer-column">
       <h4>Contacto</h4>
       <ul class="contact-list">
@@ -44,20 +45,18 @@
       </ul>
     </div>
 
-    <!-- Columna 4: Horario (ejemplo) -->
     <div class="footer-column">
       <h4>Horario de atención</h4>
       <ul class="schedule">
-        <li><span>Lunes a Viernes:</span> 8:00 am - 6:00 pm</li>
-        <li><span>Sábados:</span> 9:00 am - 1:00 pm</li>
-        <li><span>Domingos:</span> Cerrado</li>
+        <li><span>Lunes a Viernes:</span><span class="schedule-time">8:00 am - 6:00 pm</span></li>
+        <li><span>Sábados:</span><span class="schedule-time">9:00 am - 1:00 pm</span></li>
+        <li><span>Domingos:</span><span class="schedule-time closed">Cerrado</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- Copyright -->
   <div class="footer-bottom">
-    <div class="footer-container">
+    <div class="footer-container footer-bottom-inner">
       <p>&copy; {{ currentYear }} ImprentaWeb. Todos los derechos reservados.</p>
       <p class="footer-credits">Diseñado con <mat-icon>favorite</mat-icon> por <a href="#" target="_blank">Tu Agencia</a></p>
     </div>

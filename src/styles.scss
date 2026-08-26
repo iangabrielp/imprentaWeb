@@ -1,45 +1,102 @@
-// 1. Primero, importar el tema de Angular Material con @use
 @use '@angular/material' as mat;
 
-// 2. Incluir el core de Material (necesario para todos los componentes)
 @include mat.core();
 
-// 3. Definir paletas de colores personalizadas
 $my-primary: mat.define-palette(mat.$indigo-palette);
 $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 $my-warn: mat.define-palette(mat.$red-palette);
 
-// 4. Crear el tema claro
-$my-theme: mat.define-light-theme((
+$my-dark-theme: mat.define-dark-theme((
   color: (
     primary: $my-primary,
     accent: $my-accent,
     warn: $my-warn,
   ),
-  typography: mat.define-typography-config(),
+  typography: mat.define-typography-config(
+    $font-family: '"Inter", sans-serif',
+  ),
   density: 0,
 ));
 
-// 5. Aplicar el tema a todos los componentes de Material
-@include mat.all-component-themes($my-theme);
+@include mat.all-component-themes($my-dark-theme);
 
-// 6. RESTO DE ESTILOS GLOBALES (después de @use y @include)
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-tertiary: #1a1a2e;
+  --bg-glass: rgba(255, 255, 255, 0.03);
+  --bg-glass-hover: rgba(255, 255, 255, 0.06);
+  --bg-glass-border: rgba(255, 255, 255, 0.08);
+  --accent-1: #6366f1;
+  --accent-2: #a855f7;
+  --accent-3: #ec4899;
+  --accent-success: #22c55e;
+  --accent-warning: #f59e0b;
+  --gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3));
+  --gradient-subtle: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(168,85,247,0.15), rgba(236,72,153,0.15));
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --glow-sm: 0 0 20px rgba(99, 102, 241, 0.15);
+  --glow-md: 0 0 40px rgba(99, 102, 241, 0.2);
+  --glow-lg: 0 0 60px rgba(99, 102, 241, 0.3);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
   height: 100%;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #fafafa;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.3);
+  color: var(--text-primary);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
 }
 
 a {
@@ -50,4 +107,248 @@ a {
 img {
   max-width: 100%;
   height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--text-primary);
+}
+
+// Glassmorphism base
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--bg-glass-border);
+  border-radius: var(--radius-lg);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+}
+
+// Gradient text
+.gradient-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Button base
+.btn-glow {
+  position: relative;
+  background: var(--gradient);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 0.875rem 2rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    z-index: -1;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glow-md);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Scroll reveal
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+
+  &.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-reveal="left"] {
+  transform: translateX(-40px);
+
+  &.revealed {
+    transform: translateX(0);
+  }
+}
+
+[data-reveal="right"] {
+  transform: translateX(40px);
+
+  &.revealed {
+    transform: translateX(0);
+  }
+}
+
+[data-reveal="scale"] {
+  transform: scale(0.9);
+
+  &.revealed {
+    transform: scale(1);
+  }
+}
+
+// Stagger
+.stagger-item {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  transition-delay: calc(var(--stagger-index, 0) * 0.1s);
+
+  &.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Keyframes
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.6), 0 0 60px rgba(168, 85, 247, 0.3); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes slide-in-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes border-glow {
+  0%, 100% { border-color: rgba(99, 102, 241, 0.2); }
+  50% { border-color: rgba(168, 85, 247, 0.4); }
+}
+
+// Section styling
+.section-futuristic {
+  padding: 6rem 0;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .section-badge {
+    display: inline-block;
+    padding: 0.375rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    background: var(--gradient-subtle);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    color: var(--accent-1);
+  }
+}
+
+// Angular Material overrides for dark theme
+.mat-mdc-card {
+  --mdc-elevated-card-container-color: var(--bg-secondary);
+  --mdc-elevated-card-container-shape: 16px;
+}
+
+.mat-mdc-raised-button.mat-accent {
+  --mdc-protected-button-container-color: var(--accent-1);
+}
+
+.mat-mdc-icon-button {
+  color: var(--text-secondary);
+}
+
+.mat-expansion-panel {
+  --mdc-elevated-card-container-color: var(--bg-secondary) !important;
+  --mat-expansion-panel-text-color: var(--text-primary) !important;
+}
+
+.mat-form-field-appearance-outline .mdc-text-field--outlined .mdc-notched-outline__leading,
+.mat-form-field-appearance-outline .mdc-text-field--outlined .mdc-notched-outline__notch,
+.mat-form-field-appearance-outline .mdc-text-field--outlined .mdc-notched-outline__trailing {
+  border-color: var(--border) !important;
+}
+
+.mat-mdc-form-field {
+  color: var(--text-secondary);
+}
+
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: var(--accent-1);
 }

@@ -1,27 +1,34 @@
 <section class="testimonials-section" id="testimonios">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header" data-reveal>
+      <span class="section-badge">Testimonios</span>
       <h2>Lo que dicen nuestros clientes</h2>
       <p>La satisfacción de nuestros clientes es nuestra mejor carta de presentación.</p>
     </div>
 
     <div *ngIf="!loading; else loadingTemplate">
       <div class="testimonials-grid" *ngIf="testimonials.length > 0; else noTestimonials">
-        <div class="testimonial-card" *ngFor="let t of testimonials">
-          <div class="testimonial-header">
-            <img [src]="t.clientImage" [alt]="t.clientName" loading="lazy" class="client-image">
-            <div class="client-info">
-              <h4>{{ t.clientName }}</h4>
-              <p class="client-company" *ngIf="t.clientCompany">{{ t.clientCompany }}</p>
+        <div class="testimonial-card stagger-item" *ngFor="let t of testimonials; let i = index" [style.--stagger-index]="i">
+          <div class="testimonial-quote-icon">
+            <mat-icon>format_quote</mat-icon>
+          </div>
+          <div class="testimonial-content">
+            <p>{{ t.content }}</p>
+          </div>
+          <div class="testimonial-footer">
+            <div class="testimonial-header">
+              <img [src]="t.clientImage" [alt]="t.clientName" loading="lazy" class="client-image">
+              <div class="client-info">
+                <h4>{{ t.clientName }}</h4>
+                <p class="client-company" *ngIf="t.clientCompany">{{ t.clientCompany }}</p>
+              </div>
+            </div>
+            <div class="testimonial-meta">
               <div class="rating">
                 <mat-icon *ngFor="let star of getStars(t.rating)">star</mat-icon>
               </div>
+              <span class="testimonial-date">{{ t.date | date:'dd/MM/yyyy' }}</span>
             </div>
-          </div>
-          <div class="testimonial-content">
-            <mat-icon class="quote-icon">format_quote</mat-icon>
-            <p>{{ t.content }}</p>
-            <span class="testimonial-date">{{ t.date | date:'dd/MM/yyyy' }}</span>
           </div>
         </div>
       </div>

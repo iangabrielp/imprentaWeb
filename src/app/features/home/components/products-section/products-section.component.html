@@ -1,14 +1,17 @@
 <section class="products-section" id="productos">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header" data-reveal>
+      <span class="section-badge">Productos</span>
       <h2>Productos Destacados</h2>
       <p>Equipos e insumos para optimizar tu negocio. Calidad garantizada.</p>
     </div>
 
     <div class="products-grid" *ngIf="!loading; else loadingTemplate">
       <app-product-card
-        *ngFor="let product of products"
+        *ngFor="let product of products; let i = index"
         [product]="product"
+        class="stagger-item"
+        [style.--stagger-index]="i"
       ></app-product-card>
     </div>
 
@@ -22,9 +25,10 @@
       <p>No hay productos disponibles en este momento.</p>
     </div>
 
-    <div class="view-all" *ngIf="!loading && products.length > 0">
+    <div class="view-all" *ngIf="!loading && products.length > 0" data-reveal>
       <a routerLink="/productos" class="view-all-btn">
-        Ver todos los productos <mat-icon>arrow_forward</mat-icon>
+        <span>Ver todos los productos</span>
+        <mat-icon>arrow_forward</mat-icon>
       </a>
     </div>
   </div>

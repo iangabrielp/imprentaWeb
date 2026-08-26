@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -21,14 +21,18 @@ import { MatMenuModule } from '@angular/material/menu';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  // Control del menú móvil
   isMenuOpen = false;
+  isScrolled = false;
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    this.isScrolled = window.scrollY > 50;
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  // Lista de navegación principal
   navItems = [
     { label: 'Inicio', link: '/' },
     { label: 'Servicios', link: '/servicios' },
