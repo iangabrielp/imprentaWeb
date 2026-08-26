@@ -1,0 +1,92 @@
+<section class="contact-section" id="contacto">
+  <div class="container">
+    <div class="section-header">
+      <h2>Contacto</h2>
+      <p>¿Tienes un proyecto en mente? Escríbenos y te respondemos a la brevedad.</p>
+    </div>
+
+    <div *ngIf="!loading; else loadingTemplate">
+      <div class="contact-grid">
+        <!-- Información de contacto -->
+        <div class="contact-info">
+          <h3>Información de contacto</h3>
+          <ul>
+            <li>
+              <mat-icon>location_on</mat-icon>
+              <span>{{ contactInfo.address }}</span>
+            </li>
+            <li>
+              <mat-icon>phone</mat-icon>
+              <a href="tel:{{ contactInfo.phone }}">{{ contactInfo.phone }}</a>
+            </li>
+            <li>
+              <mat-icon>email</mat-icon>
+              <a href="mailto:{{ contactInfo.email }}">{{ contactInfo.email }}</a>
+            </li>
+            <li>
+              <mat-icon>whatsapp</mat-icon>
+              <a href="https://wa.me/{{ contactInfo.whatsapp }}" target="_blank">WhatsApp</a>
+            </li>
+          </ul>
+          <!-- Mapa (placeholder) -->
+          <div class="map-placeholder" *ngIf="contactInfo.mapUrl">
+            <iframe
+              [src]="contactInfo.mapUrl | safeUrl"
+              width="100%"
+              height="250"
+              style="border:0; border-radius: 8px;"
+              allowfullscreen=""
+              loading="lazy">
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Formulario -->
+        <div class="contact-form">
+          <h3>Envíanos un mensaje</h3>
+          <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Nombre completo</mat-label>
+              <input matInput [(ngModel)]="formData.name" name="name" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Correo electrónico</mat-label>
+              <input matInput type="email" [(ngModel)]="formData.email" name="email" required email>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Teléfono</mat-label>
+              <input matInput type="tel" [(ngModel)]="formData.phone" name="phone">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Empresa (opcional)</mat-label>
+              <input matInput [(ngModel)]="formData.company" name="company">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Mensaje</mat-label>
+              <textarea matInput rows="4" [(ngModel)]="formData.message" name="message" required></textarea>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="!contactForm.valid || isSubmitting">
+              {{ isSubmitting ? 'Enviando...' : 'Enviar mensaje' }}
+            </button>
+
+            <div *ngIf="submitSuccess" class="success-message">
+              <mat-icon>check_circle</mat-icon> ¡Mensaje enviado! Te contactaremos pronto.
+            </div>
+            <div *ngIf="submitError" class="error-message">
+              <mat-icon>error</mat-icon> Hubo un error al enviar, pero puedes contactarnos por WhatsApp.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #loadingTemplate>
+      <div class="loading-spinner">Cargando información de contacto...</div>
+    </ng-template>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+<section class="products-section" id="productos">
+  <div class="container">
+    <div class="section-header">
+      <h2>Productos Destacados</h2>
+      <p>Equipos e insumos para optimizar tu negocio. Calidad garantizada.</p>
+    </div>
+
+    <div class="products-grid" *ngIf="!loading; else loadingTemplate">
+      <app-product-card
+        *ngFor="let product of products"
+        [product]="product"
+      ></app-product-card>
+    </div>
+
+    <ng-template #loadingTemplate>
+      <div class="loading-spinner">
+        <p>Cargando productos...</p>
+      </div>
+    </ng-template>
+
+    <div *ngIf="!loading && products.length === 0" class="no-products">
+      <p>No hay productos disponibles en este momento.</p>
+    </div>
+
+    <div class="view-all" *ngIf="!loading && products.length > 0">
+      <a routerLink="/productos" class="view-all-btn">
+        Ver todos los productos <mat-icon>arrow_forward</mat-icon>
+      </a>
+    </div>
+  </div>
+</section>

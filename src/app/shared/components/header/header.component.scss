@@ -1,0 +1,186 @@
+// Estilos del Header
+.header-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #1a1a2e;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  padding: 0 1rem;
+  height: 70px;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// Logo
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: #fff;
+
+  .logo-img {
+    height: 40px;
+    width: auto;
+  }
+
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+
+    .highlight {
+      color: #ff6b6b;
+    }
+  }
+}
+
+// Navegación de escritorio
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+
+    &:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.15);
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 3px;
+        background: #ff6b6b;
+        border-radius: 3px 3px 0 0;
+      }
+    }
+  }
+}
+
+// Acciones (Login y menú toggle)
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .login-btn {
+    mat-icon {
+      margin-right: 4px;
+    }
+  }
+
+  .menu-toggle {
+    display: none;
+    color: #fff;
+  }
+}
+
+// Menú móvil
+.mobile-menu {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  background: #1a1a2e;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transform: translateY(-120%);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+
+  &.open {
+    transform: translateY(0);
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+
+    &:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .mobile-login-btn {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+}
+
+// Responsive
+@media (max-width: 992px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .actions .menu-toggle {
+    display: inline-flex;
+  }
+
+  .logo .logo-text {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-toolbar {
+    height: 60px;
+    padding: 0 0.5rem;
+  }
+
+  .logo .logo-img {
+    height: 30px;
+  }
+
+  .logo .logo-text {
+    font-size: 1rem;
+  }
+
+  .login-btn span {
+    display: none; // Oculta el texto "Login" en móvil, solo icono
+  }
+
+  .login-btn mat-icon {
+    margin-right: 0;
+  }
+}

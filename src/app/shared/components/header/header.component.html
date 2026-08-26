@@ -1,0 +1,37 @@
+<!-- Barra de navegación principal -->
+<mat-toolbar color="primary" class="header-toolbar">
+  <div class="header-container">
+    <!-- Logo -->
+    <a routerLink="/" class="logo">
+      <img src="assets/images/services/logo1.jpg" alt="Imprenta Web" class="logo-img">
+      <span class="logo-text">Estudio<span class="highlight">Creativo</span></span>
+    </a>
+
+    <!-- Navegación para escritorio -->
+    <nav class="desktop-nav">
+      <a *ngFor="let item of navItems" [routerLink]="item.link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        {{ item.label }}
+      </a>
+    </nav>
+
+    <!-- Botones de acción (Login + menú móvil) -->
+    <div class="actions">
+      <button mat-raised-button color="accent" routerLink="/login" class="login-btn">
+        <mat-icon>login</mat-icon> Login
+      </button>
+      <button mat-icon-button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
+        <mat-icon>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-toolbar>
+
+<!-- Menú móvil (desplegable) -->
+<div class="mobile-menu" [class.open]="isMenuOpen">
+  <a *ngFor="let item of navItems" [routerLink]="item.link" (click)="toggleMenu()" routerLinkActive="active">
+    {{ item.label }}
+  </a>
+  <button mat-raised-button color="accent" routerLink="/login" (click)="toggleMenu()" class="mobile-login-btn">
+    <mat-icon>login</mat-icon> Login
+  </button>
+</div>

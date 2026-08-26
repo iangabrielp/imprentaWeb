@@ -1,0 +1,116 @@
+.about-section {
+  padding: 4rem 0;
+  background: #fff;
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .about-image {
+    img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .about-content {
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #ff6b6b;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .description {
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-values {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+
+      .value-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: #f8f9fa;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        color: #333;
+
+        mat-icon {
+          font-size: 18px;
+          color: #4caf50;
+        }
+      }
+    }
+
+    .about-mission-vision {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+
+      .mv-item {
+        background: #f8f9fa;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        border-left: 4px solid #ff6b6b;
+
+        h4 {
+          font-size: 1rem;
+          font-weight: 600;
+          color: #1a1a2e;
+          margin-bottom: 0.25rem;
+        }
+
+        p {
+          font-size: 0.9rem;
+          color: #555;
+          margin: 0;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-image {
+      order: -1;
+    }
+
+    .about-mission-vision {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .about-content h2 {
+      font-size: 2rem;
+    }
+
+    .about-values .value-item {
+      font-size: 0.8rem;
+      padding: 0.3rem 0.8rem;
+    }
+  }
+}

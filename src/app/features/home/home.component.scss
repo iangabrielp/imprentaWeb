@@ -1,0 +1,9 @@
+// Estilos para el Home
+section {
+  padding: 4rem 0;
+}
+
+// Alternar colores de fondo para dar contraste (opcional)
+section:nth-child(even) {
+  background-color: #f8f9fa;
+}

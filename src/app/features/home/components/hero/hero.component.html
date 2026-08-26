@@ -1,0 +1,8 @@
+<section class="hero" *ngIf="heroData && heroData.enabled" [style.background-image]="'url(' + heroData.backgroundImage + ')'">
+  <div class="hero-overlay"></div>
+  <div class="hero-content container">
+    <h1 class="hero-title">{{ heroData.title }}</h1>
+    <p class="hero-subtitle">{{ heroData.subtitle }}</p>
+    <a [routerLink]="heroData.ctaLink" class="hero-cta btn-primary">{{ heroData.ctaText }}</a>
+  </div>
+</section>

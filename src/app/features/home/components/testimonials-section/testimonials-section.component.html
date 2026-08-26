@@ -1,0 +1,41 @@
+<section class="testimonials-section" id="testimonios">
+  <div class="container">
+    <div class="section-header">
+      <h2>Lo que dicen nuestros clientes</h2>
+      <p>La satisfacción de nuestros clientes es nuestra mejor carta de presentación.</p>
+    </div>
+
+    <div *ngIf="!loading; else loadingTemplate">
+      <div class="testimonials-grid" *ngIf="testimonials.length > 0; else noTestimonials">
+        <div class="testimonial-card" *ngFor="let t of testimonials">
+          <div class="testimonial-header">
+            <img [src]="t.clientImage" [alt]="t.clientName" loading="lazy" class="client-image">
+            <div class="client-info">
+              <h4>{{ t.clientName }}</h4>
+              <p class="client-company" *ngIf="t.clientCompany">{{ t.clientCompany }}</p>
+              <div class="rating">
+                <mat-icon *ngFor="let star of getStars(t.rating)">star</mat-icon>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-content">
+            <mat-icon class="quote-icon">format_quote</mat-icon>
+            <p>{{ t.content }}</p>
+            <span class="testimonial-date">{{ t.date | date:'dd/MM/yyyy' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noTestimonials>
+        <p class="no-data">No hay testimonios disponibles.</p>
+      </ng-template>
+    </div>
+
+    <ng-template #loadingTemplate>
+      <div class="loading-spinner">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Cargando testimonios...</p>
+      </div>
+    </ng-template>
+  </div>
+</section>

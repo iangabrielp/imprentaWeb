@@ -1,0 +1,35 @@
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <h2>Preguntas frecuentes</h2>
+      <p>Resolvemos las dudas más comunes sobre nuestros servicios y productos.</p>
+    </div>
+
+    <div *ngIf="!loading; else loadingTemplate">
+      <div *ngIf="faqs.length > 0; else noFaqs">
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let faq of faqs" [expanded]="faq === faqs[0]">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>help_outline</mat-icon>
+                {{ faq.question }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>{{ faq.answer }}</p>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+      <ng-template #noFaqs>
+        <p class="no-data">No hay preguntas frecuentes disponibles.</p>
+      </ng-template>
+    </div>
+
+    <ng-template #loadingTemplate>
+      <div class="loading-spinner">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Cargando preguntas...</p>
+      </div>
+    </ng-template>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+<section class="about-section" id="nosotros" *ngIf="!loading && about.enabled !== false">
+  <div class="container">
+    <div class="about-grid">
+      <!-- Imagen -->
+      <div class="about-image">
+        <img [src]="about.image" [alt]="about.title" loading="lazy">
+      </div>
+
+      <!-- Contenido -->
+      <div class="about-content">
+        <h2>{{ about.title }}</h2>
+        <p class="subtitle">{{ about.subtitle }}</p>
+        <p class="description">{{ about.description }}</p>
+
+        <div class="about-values">
+          <div *ngFor="let value of about.values" class="value-item">
+            <mat-icon>check_circle</mat-icon>
+            <span>{{ value }}</span>
+          </div>
+        </div>
+
+        <div class="about-mission-vision">
+          <div class="mv-item">
+            <h4>Misión</h4>
+            <p>{{ about.mission }}</p>
+          </div>
+          <div class="mv-item">
+            <h4>Visión</h4>
+            <p>{{ about.vision }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

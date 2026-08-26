@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+// 1. Primero, importar el tema de Angular Material con @use
+@use '@angular/material' as mat;
+
+// 2. Incluir el core de Material (necesario para todos los componentes)
+@include mat.core();
+
+// 3. Definir paletas de colores personalizadas
+$my-primary: mat.define-palette(mat.$indigo-palette);
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$my-warn: mat.define-palette(mat.$red-palette);
+
+// 4. Crear el tema claro
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+// 5. Aplicar el tema a todos los componentes de Material
+@include mat.all-component-themes($my-theme);
+
+// 6. RESTO DE ESTILOS GLOBALES (después de @use y @include)
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #fafafa;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

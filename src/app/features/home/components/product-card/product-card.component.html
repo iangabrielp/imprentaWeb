@@ -1,0 +1,25 @@
+<mat-card class="product-card" (click)="openProductDetail()">
+  <div class="product-image">
+    <img [src]="product.image" [alt]="product.name" loading="lazy">
+    <div class="product-badge" *ngIf="product.stock !== undefined">
+      {{ product.stock > 0 ? 'En stock' : 'Agotado' }}
+    </div>
+  </div>
+
+  <mat-card-content>
+    <div class="product-category" *ngIf="product.category">
+      <mat-icon>label</mat-icon> {{ product.category }}
+    </div>
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.description | slice:0:80 }}{{ product.description.length > 80 ? '...' : '' }}</p>
+    <div class="product-price">
+      ${{ product.price }}
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="$event.stopPropagation(); openProductDetail()">
+      Ver producto <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
