@@ -44,9 +44,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.observer) {
-      this.observer.disconnect();
-    }
+    if (this.observer) this.observer.disconnect();
   }
 
   private initScrollReveal(): void {
@@ -55,23 +53,27 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('revealed');
-
-            const staggerItems = entry.target.querySelectorAll('.stagger-item');
-            staggerItems.forEach((item) => {
-              item.classList.add('revealed');
-            });
+            const section = entry.target.closest('section');
+            if (section) {
+              section.querySelectorAll('.stagger-item:not(.revealed)').forEach((item, index) => {
+                setTimeout(() => item.classList.add('revealed'), index * 100);
+              });
+            }
           }
         });
       },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      }
+      { threshold: 0.05, rootMargin: '0px 0px -30px 0px' }
     );
 
-    setTimeout(() => {
-      const elements = document.querySelectorAll('[data-reveal]');
-      elements.forEach((el) => this.observer!.observe(el));
-    }, 100);
+    const observe = () => {
+      document.querySelectorAll('[data-reveal]:not(.revealed)').forEach((el) => {
+        this.observer!.observe(el);
+      });
+    };
+
+    setTimeout(observe, 100);
+    setTimeout(observe, 1000);
+    setTimeout(observe, 2500);
+    setTimeout(observe, 5000);
   }
 }
