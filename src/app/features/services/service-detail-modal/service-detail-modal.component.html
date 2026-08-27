@@ -1,0 +1,71 @@
+<div class="modal-backdrop" *ngIf="isOpen" (click)="onBackdropClick($event)">
+  <div class="modal-container">
+    <button class="modal-close" (click)="closeModal()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="modal-image" *ngIf="variant.image || service.image">
+      <img [src]="variant.image || service.image" [alt]="variant.name">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-badge-price">
+        ${{ variant.price }}
+      </div>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-category">{{ service.name }}</div>
+      <h2 class="modal-title">{{ variant.name }}</h2>
+      <p class="modal-description">{{ variant.description }}</p>
+
+      <div class="modal-details">
+        <div class="detail-item" *ngIf="variant.material">
+          <mat-icon>inventory_2</mat-icon>
+          <div>
+            <span class="detail-label">Material</span>
+            <span class="detail-value">{{ variant.material }}</span>
+          </div>
+        </div>
+        <div class="detail-item" *ngIf="variant.size">
+          <mat-icon>straighten</mat-icon>
+          <div>
+            <span class="detail-label">Tamaño</span>
+            <span class="detail-value">{{ variant.size }}</span>
+          </div>
+        </div>
+        <div class="detail-item" *ngIf="variant.deliveryTime">
+          <mat-icon>schedule</mat-icon>
+          <div>
+            <span class="detail-label">Tiempo de entrega</span>
+            <span class="detail-value">{{ variant.deliveryTime }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-features" *ngIf="variant.features && variant.features.length > 0">
+        <h3>Características</h3>
+        <ul>
+          <li *ngFor="let feature of variant.features">
+            <mat-icon>check_circle</mat-icon>
+            {{ feature }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="modal-extra" *ngIf="variant.details">
+        <h3>Información adicional</h3>
+        <p>{{ variant.details }}</p>
+      </div>
+
+      <div class="modal-price-section">
+        <div class="modal-price">
+          <span class="price-label">Precio por pieza</span>
+          <span class="price-value">${{ variant.price }} <small>MXN</small></span>
+        </div>
+        <button class="btn-glow modal-cta" (click)="openWhatsApp()">
+          <mat-icon>chat</mat-icon>
+          Cotizar por WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

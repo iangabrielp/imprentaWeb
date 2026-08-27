@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ServiceCardComponent } from '../service-card/service-card.component';
 import { ServiceItem } from '../../../../core/models/site-data.model';
 import { DataService } from '../../../../core/services/data.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-services-section',
   standalone: true,
-  imports: [CommonModule, ServiceCardComponent, MatProgressSpinnerModule],
+  imports: [CommonModule, RouterModule, ServiceCardComponent, MatProgressSpinnerModule, MatIconModule],
   templateUrl: './services-section.component.html',
   styleUrl: './services-section.component.scss'
 })
@@ -20,7 +22,7 @@ export class ServicesSectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.getServices().subscribe(services => {
-      this.services = services.filter(s => s.enabled !== false); // Solo habilitados
+      this.services = services.filter(s => s.enabled !== false).slice(0, 3);
       this.loading = false;
     });
   }

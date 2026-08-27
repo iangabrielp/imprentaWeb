@@ -31,12 +31,22 @@ export interface ServiceItem {
   features: string[];
   variants?: ServiceVariant[];
   enabled?: boolean;
+  slug?: string;
+  featured?: boolean;
+  shortDescription?: string;
+  fullDescription?: string;
 }
 
 export interface ServiceVariant {
   name: string;
   description: string;
   price: number;
+  image?: string;
+  features?: string[];
+  details?: string;
+  material?: string;
+  size?: string;
+  deliveryTime?: string;
 }
 
 export interface ProductItem {

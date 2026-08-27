@@ -1,0 +1,87 @@
+<div class="services-page">
+  <div class="services-hero">
+    <div class="container">
+      <span class="section-badge">Nuestros Servicios</span>
+      <h1>Soluciones de Impresión para Cada Necesidad</h1>
+      <p>Explora nuestra amplia gama de servicios de impresión profesional. Desde tarjetas de presentación hasta catálogos, tenemos todo lo que necesitas para hacer crecer tu negocio.</p>
+    </div>
+  </div>
+
+  <div class="services-nav-container" *ngIf="!loading && services.length > 0">
+    <div class="container">
+      <nav class="services-nav">
+        <button
+          *ngFor="let service of services"
+          class="nav-pill"
+          (click)="scrollToService(service.slug || '')"
+        >
+          {{ service.name }}
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <div class="services-content container" *ngIf="!loading; else loadingTemplate">
+    <section
+      *ngFor="let service of services; let i = index"
+      [id]="service.slug"
+      class="service-section"
+      data-reveal
+    >
+      <div class="service-header">
+        <div class="service-icon-wrapper">
+          <mat-icon>{{ service.icon || 'print' }}</mat-icon>
+        </div>
+        <div class="service-info">
+          <h2>{{ service.name }}</h2>
+          <p>{{ service.fullDescription || service.description }}</p>
+        </div>
+      </div>
+
+      <div class="variants-grid" *ngIf="service.variants && service.variants.length > 0">
+        <div
+          *ngFor="let variant of service.variants; let j = index"
+          class="variant-card"
+          (click)="openVariant(service, variant)"
+          [style.--stagger-index]="j"
+        >
+          <div class="variant-image" *ngIf="variant.image || service.image">
+            <img [src]="variant.image || service.image" [alt]="variant.name" loading="lazy">
+            <div class="variant-image-overlay"></div>
+          </div>
+          <div class="variant-body">
+            <h3>{{ variant.name }}</h3>
+            <p class="variant-desc">{{ variant.description }}</p>
+            <div class="variant-features" *ngIf="variant.features && variant.features.length > 0">
+              <span *ngFor="let f of variant.features.slice(0, 3)" class="vf-tag">
+                <mat-icon>check</mat-icon> {{ f }}
+              </span>
+            </div>
+            <div class="variant-footer">
+              <span class="variant-price">${{ variant.price }} <small>MXN</small></span>
+              <button class="variant-btn">
+                Ver detalle
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <ng-template #loadingTemplate>
+    <div class="loading-container">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Cargando servicios...</p>
+    </div>
+  </ng-template>
+
+  <app-service-detail-modal
+    *ngIf="selectedService && selectedVariant"
+    [service]="selectedService"
+    [variant]="selectedVariant"
+    [isOpen]="modalOpen"
+    (close)="closeModal()"
+  ></app-service-detail-modal>
+</div>

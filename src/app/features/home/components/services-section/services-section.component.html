@@ -15,6 +15,13 @@
       ></app-service-card>
     </div>
 
+    <div class="services-cta" *ngIf="!loading" data-reveal>
+      <a routerLink="/servicios" class="btn-glow">
+        Ver todos los servicios
+        <mat-icon>arrow_forward</mat-icon>
+      </a>
+    </div>
+
     <ng-template #loadingTemplate>
       <div class="loading-spinner">
         <mat-spinner diameter="50"></mat-spinner>
